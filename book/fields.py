@@ -1,5 +1,5 @@
 from .exceptions import ValidationError
-from .helpers import date_to_string, string_to_date
+from .helpers import string_to_date
 
 class Field:
     def __init__(self, value):
