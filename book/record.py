@@ -44,7 +44,7 @@ class Record:
         """Додає дату дня народження для запису."""
         current_birthday = Birthday(date)
         
-        if self.birthday is not None and self.birthday == current_birthday:
+        if self.birthday is not None and self.birthday.value == current_birthday.value:
             raise DuplicateError(f"Date of birth '{current_birthday}' is already set.")
         
         self.birthday = current_birthday
@@ -57,6 +57,6 @@ class Record:
         self.birthday = None
 
     def __str__(self):
-        mask = "({0}{1}{2})-{3}{4}{5}-{6}{7}-{8}{9}"  # Так буде ще красивіше виводитись номер
-        phones_str = '; '.join(mask.format(*p.value) for p in self.phones)
-        return f"Contact name: {self.name.value}, phones: {phones_str}"
+        birthday_str = self.birthday or "'empty'"
+        phones_str = '; '.join("({0}{1}{2})-{3}{4}{5}-{6}{7}-{8}{9}".format(*p.value) for p in self.phones)
+        return f"Contact name: {self.name.value}, birthday: {birthday_str}, phones: {phones_str}"

@@ -13,7 +13,7 @@ class AddressBook(UserDict):
     def add_record(self, record: Record):
         """Додає запис до адресної книги."""
         if record.name.value in self.data:
-            raise DuplicateError(f"Record for '{record.name.value}' already exists.")
+            raise DuplicateError(f"Record for '{record.name}' already exists.")
         
         self.data[record.name.value] = record
     
@@ -37,7 +37,7 @@ class AddressBook(UserDict):
             if record.birthday is None:
                 continue
             
-            birthday: date = record.birthday.value  # Вказую тип для birthday, бо IDE бачить birthday як Any 
+            birthday = string_to_date(record.birthday.value)
             birthday_this_year = birthday.replace(year=today.year)
 
             if birthday_this_year < today:

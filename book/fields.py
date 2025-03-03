@@ -27,9 +27,7 @@ class Phone(Field):
 class Birthday(Field):
     def __init__(self, value: str):
         try:
-            super().__init__(string_to_date(value))
+            string_to_date(value)  # Спроба преведення дати до формату 'DD.MM.YYYY'
+            super().__init__(value)
         except ValueError:
             raise ValidationError(f"Invalid date format: '{value}'. The date must be in 'DD.MM.YYYY' format.")
-        
-    def __str__(self):
-        return date_to_string(self.value)
